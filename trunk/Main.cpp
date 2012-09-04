@@ -5,7 +5,7 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Wed Aug 22 16:59:27 2012 thierry berger
-// Last update Thu Aug 23 08:20:36 2012 thierry berger
+// Last update Mon Sep  3 15:21:25 2012 thierry berger
 //
 
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
     {
       world.update();
       world.drawAll();
+      usleep(2500);
     }
   
   return 0;

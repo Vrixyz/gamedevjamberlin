@@ -5,7 +5,7 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Thu Aug 23 05:56:57 2012 thierry berger
-// Last update Thu Aug 23 14:56:48 2012 thierry berger
+// Last update Tue Sep  4 17:09:47 2012 thierry berger
 //
 
 #include "Hotdog.hpp"
@@ -24,10 +24,7 @@ void	Hotdog::update()
 
 void	Hotdog::accelerate(float32 acc)
 {
-  if (acc > 1)
-    _phBody->SetLinearVelocity(b2Vec2(1, 0));
-  else if (acc < -1)
-    _phBody->SetLinearVelocity(b2Vec2(-1, 0));
-  else
-    _phBody->SetLinearVelocity(b2Vec2(0, 0));
+  int movement = acc > 0 ? 1 : (acc == 0 ? 0 : -1);
+
+  _phBody->SetLinearVelocity(b2Vec2((acc + 2 * movement) / 2, 0));
 }

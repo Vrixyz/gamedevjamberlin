@@ -5,7 +5,7 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Thu Aug 23 05:43:47 2012 thierry berger
-// Last update Thu Aug 23 14:48:35 2012 thierry berger
+// Last update Mon Sep  3 15:23:19 2012 thierry berger
 //
 
 #include "GameObject.hpp"
@@ -22,6 +22,7 @@ GameObject::GameObject(b2World& w, const float32& pos_x, const float32& pos_y, c
     b2_dynamicBody;
   bDynDef.position.Set(pos_x, pos_y);
   bDynDef.userData = new std::string(name);
+  bDynDef.gravityScale = 5;
   if (isStatic)
     {
       bDynDef.gravityScale = 0;
