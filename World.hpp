@@ -5,7 +5,7 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Thu Aug 23 04:53:13 2012 thierry berger
-// Last update Mon Sep  3 13:13:48 2012 thierry berger
+// Last update Sat Sep  8 19:00:57 2012 thierry berger
 //
 
 #ifndef WORLD_HPP
@@ -37,8 +37,8 @@ public:
   sf::RenderWindow app;
 
 private:
-  sf::Shape	transformsForView(const Vegetable&);
-  sf::Shape	transformsForView(const Hotdog&);
+  sf::RectangleShape	transformsForView(const Vegetable&);
+  sf::RectangleShape	transformsForView(const Hotdog&);
  
   TimeCounter	timer;
   b2ContactListener contactListener;

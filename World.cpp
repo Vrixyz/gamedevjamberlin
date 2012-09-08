@@ -5,14 +5,14 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Thu Aug 23 04:59:47 2012 thierry berger
-// Last update Tue Sep  4 16:57:40 2012 thierry berger
+// Last update Sat Sep  8 19:04:34 2012 thierry berger
 //
 
 #include "World.hpp"
 
 World::~World()
 {
-  app.Close();
+  app.close();
 }
 
 World::World() : _w(b2Vec2(0,-0.02)), app(sf::VideoMode(W_WIDTH, W_HEIGHT), "Food Defense")
@@ -41,19 +41,19 @@ void	World::update()
 
   std::cout << elapsedTime << std::endl;
 
-  while (app.GetEvent(event))
+  while (app.pollEvent(event))
     {
-      if (event.Type == sf::Event::Closed ||
-	  ((event.Type == sf::Event::KeyPressed) &&
-	   (event.Key.Code == sf::Key::Escape)))
+      if (event.type == sf::Event::Closed ||
+	  ((event.type == sf::Event::KeyPressed) &&
+	   (event.key.code == sf::Keyboard::Escape)))
 	stop();
-      if (event.Type == sf::Event::JoyMoved)
+      if (event.type == sf::Event::JoystickMoved)
 	{
-	  std::cout << event.JoyMove.JoystickId << " " << 
-	    event.JoyMove.Axis << " " << event.JoyMove.Position << std::endl;
-	  if (event.JoyMove.Axis == sf::Joy::AxisX)
+	  std::cout << event.joystickMove.joystickId << " " << 
+	    event.joystickMove.axis << " " << event.joystickMove.position << std::endl;
+	  if (event.joystickMove.axis == sf::Joystick::X)
 	    {
-	      hotdog->accelerate(event.JoyMove.Position);
+	      hotdog->accelerate(event.joystickMove.position);
 	    }
 	}
     }
@@ -101,39 +101,44 @@ void	World::update()
 void	World::drawAll()
 {
 
-  app.Clear();
-  app.Draw(transformsForView(*tomato));
-  app.Draw(transformsForView(*hotdog));
-  app.Display();
+  app.clear();
+  app.draw(transformsForView(*tomato));
+  app.draw(transformsForView(*hotdog));
+  app.display();
 }
 
 bool	World::isRunning()
 {
-  return app.IsOpened();
+  return app.isOpen();
 }
 
 void	World::stop()
 {
-  return app.Close();
+  return app.close();
 }
 
-sf::Shape	World::transformsForView(const Vegetable& v)
+sf::RectangleShape	World::transformsForView(const Vegetable& v)
 {
-  sf::Shape shape = sf::Shape::Rectangle(-30, -30, 30, 30, sf::Color::Red);
+  sf::RectangleShape shape(sf::Vector2f(60, 60));
   const b2Vec2& position = v.getPosition();
   float32 angle = v.getAngle();
-  shape.SetPosition(position.x * 30 + W_WIDTH / 2 - 30, - position.y * 30 + W_HEIGHT / 2 - 30);
-  shape.SetRotation(angle);
+
+  shape.setOrigin(sf::Vector2f(30, 30));
+  shape.setFillColor(sf::Color::Red);
+  shape.setPosition(position.x * 30 + W_WIDTH / 2 - 30, - position.y * 30 + W_HEIGHT / 2 - 30);
+  shape.setRotation(angle);
   return shape;
 }
 
-sf::Shape	World::transformsForView(const Hotdog& h)
+sf::RectangleShape	World::transformsForView(const Hotdog& h)
 {
-  sf::Shape shape = sf::Shape::Rectangle(-30, -30, 30, 30, sf::Color::Yellow);
+  sf::RectangleShape shape(sf::Vector2f(60, 60));
   const b2Vec2& position = h.getPosition();
   float32 angle = h.getAngle();
 
-  shape.SetPosition(position.x * 30 + W_WIDTH / 2 - 30, - position.y * 30 + W_HEIGHT / 2 - 30);
-  shape.SetRotation(angle * 57.295779513082);
+  shape.setOrigin(sf::Vector2f(30, 30));
+  shape.setFillColor(sf::Color::Yellow);
+  shape.setPosition(position.x * 30 + W_WIDTH / 2 - 30, - position.y * 30 + W_HEIGHT / 2 - 30);
+  shape.setRotation(angle * 57.295779513082);
   return shape;
 }
