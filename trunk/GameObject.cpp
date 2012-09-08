@@ -5,7 +5,7 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Thu Aug 23 05:43:47 2012 thierry berger
-// Last update Mon Sep  3 15:23:19 2012 thierry berger
+// Last update Tue Sep  4 17:56:02 2012 thierry berger
 //
 
 #include "GameObject.hpp"
@@ -13,7 +13,7 @@
 GameObject::GameObject(b2World& w, const float32& pos_x, const float32& pos_y, const float32& size, bool isStatic, const std::string& name)
 {
   b2BodyDef bDynDef;
-  int	density = 1;
+  int	density = 3;
   int	restitution = 1;
 
   this->_size = size;
@@ -26,7 +26,7 @@ GameObject::GameObject(b2World& w, const float32& pos_x, const float32& pos_y, c
   if (isStatic)
     {
       bDynDef.gravityScale = 0;
-      density = 3;
+      density = 5;
       restitution = 0;
     }
   _phBody = w.CreateBody(&bDynDef);

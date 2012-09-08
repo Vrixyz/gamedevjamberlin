@@ -5,7 +5,7 @@
 // Login   <berger_t@epitech.net>
 // 
 // Started on  Thu Aug 23 05:40:31 2012 thierry berger
-// Last update Thu Aug 23 10:23:57 2012 thierry berger
+// Last update Tue Sep  4 19:22:03 2012 thierry berger
 //
 
 #ifndef GAMEOBJECT_HPP
@@ -27,7 +27,6 @@ public:
 protected:
   GameObject(b2World& w, const float32& pos_x, const float32& pos_y, const float32& size, bool isStatic = false, const std::string& name = "object");
   float32 getSize() const;
-
   b2Body* _phBody;
   float32 _size;
 };
